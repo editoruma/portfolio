@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Uma Mishra – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:    #E84F6B;
+    --deep:    #1A0A12;
+    --ink:     #2D1825;
+    --blush:   #F9E8EE;
+    --cream:   #FDF6F9;
+    --muted:   #8B6070;
+    --gold:    #D4A853;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 18px 40px; display: flex; align-items: center; justify-content: space-between;
+    background: rgba(253,246,249,0.9); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(232,79,107,0.15);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--rose); letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.85rem; letter-spacing: 0.5px; transition: color .2s; }
+  .nav-links a:hover { color: var(--rose); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 100px 80px 60px;
+    background: linear-gradient(135deg, var(--cream) 60%, var(--blush));
+    gap: 60px;
+  }
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 900;
+    line-height: 1.05; color: var(--deep);
+  }
+  .hero-text h1 span { color: var(--rose); }
+  .hero-tagline {
+    margin-top: 18px; font-size: 1.05rem; color: var(--muted);
+    line-height: 1.7; max-width: 420px;
+  }
+  .hero-badges {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px;
+  }
+  .badge {
+    background: white; border: 1px solid rgba(232,79,107,0.25);
+    color: var(--rose); padding: 6px 14px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.3px;
+  }
+  .hero-cta {
+    display: inline-block; margin-top: 36px;
+    background: var(--rose); color: white;
+    padding: 14px 32px; border-radius: 4px;
+    text-decoration: none; font-weight: 500; font-size: 0.9rem;
+    letter-spacing: 0.5px; transition: background .2s, transform .2s;
+  }
+  .hero-cta:hover { background: #c43d58; transform: translateY(-2px); }
+
+  /* ── HERO PHOTO ── */
+  .hero-photo {
+    display: flex; justify-content: center; align-items: center; position: relative;
+  }
+  .photo-ring {
+    width: 360px; height: 360px; border-radius: 50%;
+    border: 3px solid var(--rose); padding: 6px; position: relative;
+  }
+  .photo-ring::before {
+    content: ''; position: absolute; inset: -14px; border-radius: 50%;
+    border: 1px dashed rgba(232,79,107,0.35);
+  }
+  .photo-ring img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  }
+  .stat-pill {
+    position: absolute; background: white;
+    border: 1px solid rgba(232,79,107,0.2);
+    border-radius: 30px; padding: 10px 18px;
+    box-shadow: 0 4px 20px rgba(232,79,107,0.1);
+    font-size: 0.82rem; color: var(--ink); font-weight: 500;
+  }
+  .stat-pill strong { color: var(--rose); font-size: 1.1rem; display: block; }
+  .stat-pill.top { top: 10%; right: -30px; }
+  .stat-pill.bot { bottom: 10%; left: -30px; }
+
+  /* ── SECTION SHELL ── */
+  section { padding: 80px 80px; }
+  section:nth-child(even) { background: white; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--rose); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--deep); margin-bottom: 40px;
+  }
+
+  /* ── VIDEOS GRID ── */
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+  .video-card {
+    background: var(--cream); border: 1px solid rgba(232,79,107,0.15);
+    border-radius: 8px; padding: 22px 20px; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .video-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(232,79,107,0.12); }
+  .video-icon { font-size: 1.6rem; }
+  .video-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--deep); font-weight: 700; }
+  .video-link { font-size: 0.78rem; color: var(--rose); display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+  .video-link::after { content: '↗'; font-size: 0.9em; }
+
+  /* ── SERVICES ── */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .service-item {
+    border-left: 3px solid var(--rose); padding: 16px 20px;
+    background: var(--cream); border-radius: 0 6px 6px 0;
+  }
+  .service-item .icon { font-size: 1.4rem; margin-bottom: 6px; }
+  .service-item p { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+
+  /* ── SKILLS ── */
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
+  .skill-tag {
+    background: var(--blush); color: var(--ink);
+    border: 1px solid rgba(232,79,107,0.2);
+    padding: 7px 16px; border-radius: 4px; font-size: 0.83rem; font-weight: 500;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 16px; max-width: 680px; }
+  .exp-item { display: flex; gap: 16px; align-items: flex-start; }
+  .exp-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--rose); margin-top: 6px; flex-shrink: 0; }
+  .exp-text { font-size: 0.92rem; line-height: 1.7; color: var(--ink); }
+  .exp-text strong { color: var(--deep); }
+
+  /* ── PRICING ── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+  .price-card {
+    background: var(--cream); border: 1px solid rgba(232,79,107,0.2);
+    border-radius: 8px; padding: 24px 20px; text-align: center;
+  }
+  .price-card .cat { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .price-card .amount { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--rose); font-weight: 700; }
+  .price-card .note { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+  .price-card.featured { background: var(--rose); border-color: var(--rose); }
+  .price-card.featured .cat, .price-card.featured .amount, .price-card.featured .note { color: white; }
+
+  /* ── WHY ME ── */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .why-item { display: flex; gap: 14px; align-items: flex-start; }
+  .why-check { color: var(--rose); font-size: 1.1rem; margin-top: 2px; }
+  .why-text { font-size: 0.9rem; color: var(--ink); line-height: 1.6; }
+  .why-text strong { display: block; color: var(--deep); margin-bottom: 2px; }
+
+  /* ── CONTACT ── */
+  .contact-section { background: var(--deep); color: white; text-align: center; }
+  .contact-section .section-title { color: white; }
+  .contact-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: white; text-decoration: none; padding: 14px 24px; border-radius: 6px;
+    font-size: 0.88rem; transition: background .2s;
+  }
+  .contact-link:hover { background: var(--rose); border-color: var(--rose); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--ink); padding: 24px 80px; text-align: center; color: var(--muted); font-size: 0.8rem; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 16px; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; text-align: center; }
+    .hero-tagline { max-width: 100%; }
+    .hero-badges { justify-content: center; }
+    .hero-photo { order: -1; }
+    .photo-ring { width: 240px; height: 240px; }
+    .stat-pill.top { right: 0; }
+    .stat-pill.bot { left: 0; }
+    section { padding: 60px 24px; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Uma Mishra</div>
+  <div class="nav-links">
+    <a href="#portfolio">Portfolio</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:100px;">
+  <div class="hero-text">
+    <p class="section-label">Video Creator &amp; AI Content Specialist</p>
+    <h1>Hi, I'm<br/><span>Uma Mishra</span></h1>
+    <p class="hero-tagline">I turn ideas into engaging videos, AI content, animations, and websites — for creators, brands, and educational platforms.</p>
+    <div class="hero-badges">
+      <span class="badge">🎬 YouTube Videos</span>
+      <span class="badge">🤖 AI Content</span>
+      <span class="badge">🎨 Animation</span>
+      <span class="badge">💻 Web Dev</span>
+      <span class="badge">🎵 AI Music</span>
+    </div>
+    <a class="hero-cta" href="#contact">Let's Work Together →</a>
+  </div>
+  <div class="hero-photo">
+    <div class="photo-ring">
+      <img src="BeautyPlus_20191226154549115_save.jpg" alt="Uma Mishra" />
+    </div>
+    <div class="stat-pill top"><strong>50+</strong> Projects Done</div>
+    <div class="stat-pill bot"><strong>₹200</strong> Starting Price</div>
+  </div>
+</section>
+
+<!-- VIDEO PORTFOLIO -->
+<section id="portfolio">
+  <p class="section-label">Selected Work</p>
+  <h2 class="section-title">Video Portfolio</h2>
+  <div class="video-grid">
+    <a class="video-card" href="https://drive.google.com/file/d/1z5XhSz0u6Rfk3uQJaCgx7QkvANmNlckG/view" target="_blank">
+      <div class="video-icon">📱</div>
+      <div class="video-title">Tech Shorts &amp; Reels</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1RZCZF-Dofsd8_5kC0wsFWVQ7wuIvgRa6/view" target="_blank">
+      <div class="video-icon">🎨</div>
+      <div class="video-title">3D Cartoon Videos</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1Si37LyuSv104IRSHWyc8AqISJH0H-Ygu/view" target="_blank">
+      <div class="video-icon">🍳</div>
+      <div class="video-title">Cooking Videos</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1g0Ld8dS1YYnSRx8plvGSMsX7-F5ElfpQ/view" target="_blank">
+      <div class="video-icon">📖</div>
+      <div class="video-title">Hindi Story Videos</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1ZZGs594NBWxncfwPUyDtxPSta6fLcpwG/view" target="_blank">
+      <div class="video-icon">📖</div>
+      <div class="video-title">English Story Videos</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1sV6--_tgkw0-9i1iNe8Yqcgu1aVdVDgL/view" target="_blank">
+      <div class="video-icon">🎵</div>
+      <div class="video-title">Kids Songs &amp; Rhymes</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/12pZiSju7ijG0CNdwWjRB8ORVekq-aOwh/view" target="_blank">
+      <div class="video-icon">🙏</div>
+      <div class="video-title">Bhajan Shorts &amp; Videos</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1tVbX3uDyTVu3C90qwqDkZ2PGbfUqavth/view" target="_blank">
+      <div class="video-icon">🎬</div>
+      <div class="video-title">Pocket FM Style Trailers</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1-wu8Bn7foSK9NFXCvbTW1Y5l4gFeeDu8/view" target="_blank">
+      <div class="video-icon">🎼</div>
+      <div class="video-title">Hindi Music Videos</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    <a class="video-card" href="https://drive.google.com/file/d/1PXs-AVaHFK-e4i4Xd4LodM18jKJGHat4/view" target="_blank">
+      <div class="video-icon">▶️</div>
+      <div class="video-title">Long-Form YouTube Videos</div>
+      <div class="video-link">Watch on Drive</div>
+    </a>
+    
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">What I Offer</p>
+  <h2 class="section-title">Services</h2>
+  <div class="services-grid">
+    <div class="service-item"><div class="icon">🎬</div><p>All Types of Videos</p></div>
+    <div class="service-item"><div class="icon">🤖</div><p>AI Content Creation</p></div>
+    <div class="service-item"><div class="icon">🎨</div><p>2D / 3D Animation</p></div>
+    <div class="service-item"><div class="icon">📱</div><p>Social Media Content</p></div>
+    <div class="service-item"><div class="icon">✂️</div><p>Video Editing</p></div>
+    <div class="service-item"><div class="icon">💻</div><p>Website Development</p></div>
+  </div>
+
+  <div style="margin-top: 56px;">
+    <p class="section-label">Toolkit</p>
+    <h2 class="section-title" style="margin-bottom:24px;">Skills</h2>
+    <div class="skills-wrap">
+      <span class="skill-tag">Video Editing</span>
+      <span class="skill-tag">AI Content Creation</span>
+      <span class="skill-tag">Storytelling</span>
+      <span class="skill-tag">YouTube Content</span>
+      <span class="skill-tag">Thumbnail Design</span>
+      <span class="skill-tag">AI Music</span>
+      <span class="skill-tag">2D / 3D Animation</span>
+      <span class="skill-tag">WordPress</span>
+      <span class="skill-tag">HTML</span>
+      <span class="skill-tag">CSS</span>
+      <span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">SEO</span>
+      <span class="skill-tag">Content Writing</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section>
+  <p class="section-label">Track Record</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="exp-list">
+    <div class="exp-item"><div class="exp-dot"></div><div class="exp-text"><strong>TSW Music World</strong> — AI Song Videos &amp; Hindi Music Videos</div></div>
+    <div class="exp-item"><div class="exp-dot"></div><div class="exp-text"><strong>Bhajan Lokam</strong> — Bhajan Shorts &amp; Devotional Videos</div></div>
+    <div class="exp-item"><div class="exp-dot"></div><div class="exp-text"><strong>Govt Exam Point</strong> — Educational Videos &amp; Thumbnails</div></div>
+    <div class="exp-item"><div class="exp-dot"></div><div class="exp-text"><strong>Kanchan Group</strong> — Shorts, Reels &amp; Social Media Content</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-label">Transparent Rates</p>
+  <h2 class="section-title">Pricing</h2>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="cat">Shorts / Reels</div>
+      <div class="amount">₹300–500</div>
+      <div class="note">Quick turnaround</div>
+    </div>
+    <div class="price-card featured">
+      <div class="cat">Story Videos</div>
+      <div class="amount">₹1,000–2,000</div>
+      <div class="note">Most popular</div>
+    </div>
+    <div class="price-card">
+      <div class="cat">AI Song Videos</div>
+      <div class="amount">₹1,000–3,000</div>
+      <div class="note">Fully AI-powered</div>
+    </div>
+    <div class="price-card">
+      <div class="cat">Websites</div>
+      <div class="amount">₹3,000–10,000</div>
+      <div class="note">Custom quote available</div>
+    </div>
+  </div>
+  <p style="margin-top:24px; color:var(--muted); font-size:0.85rem;">Starting from ₹200 · Contact for a custom quote.</p>
+</section>
+
+<!-- WHY ME -->
+<section>
+  <p class="section-label">Why Choose Me</p>
+  <h2 class="section-title">What Sets Me Apart</h2>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-check">✦</div>
+      <div class="why-text"><strong>Professional Editing</strong>Polished, broadcast-ready output every time.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✦</div>
+      <div class="why-text"><strong>AI-Powered Content</strong>Cutting-edge AI tools for songs, photos &amp; videos.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✦</div>
+      <div class="why-text"><strong>Fast Delivery</strong>Deadlines respected, always.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✦</div>
+      <div class="why-text"><strong>Creative Storytelling</strong>Stories that connect and convert audiences.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✦</div>
+      <div class="why-text"><strong>Modern Websites</strong>Responsive, SEO-friendly &amp; visually sharp.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-check">✦</div>
+      <div class="why-text"><strong>Viral Social Content</strong>Built for reach, engagement &amp; growth.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <p class="section-label" style="color: rgba(255,255,255,0.5);">Get In Touch</p>
+  <h2 class="section-title">Let's Work Together</h2>
+  <p style="color:rgba(255,255,255,0.6); max-width:480px; margin:0 auto; line-height:1.7; font-size:0.95rem;">
+    Trusted by YouTube channels, brands &amp; organizations for creative video editing, AI content creation &amp; digital solutions.
+  </p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:umamishra797@gmail.com">📧 umamishra797@gmail.com</a>
+    <a class="contact-link" href="tel:+919111926065">📱 +91 9111926065</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Uma Mishra · Video Creator &amp; AI Content Specialist
+</footer>
+
+</body>
+</html>
